@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"github.com/kataras/iris"
-	"github.com/kataras/iris/middleware/logger"
 	"github.com/kataras/iris/middleware/recover"
 	"lris-admin/App/Controller"
+	. "lris-admin/App/Middleware"
 	"lris-admin/Config"
 	"lris-admin/Utils/DB"
 	"lris-admin/Utils/Log"
@@ -18,7 +18,8 @@ func initApp() (app *iris.Application) {
 	app = iris.New()
 
 	app.Use(recover.New())
-	app.Use(logger.New())
+	//请求记录
+	app.Use(new(AccessMdw).Handler())
 
 	app.RegisterView(iris.HTML(Config.VIEW_DIR, Config.VIEW_EXT))
 	//路由实现
@@ -33,8 +34,6 @@ func initApp() (app *iris.Application) {
 	Log.Info("DB REDIS")
 	_ = Redis.CreatePool(Config.REIDS_ADDR, Config.REDIS_DB, Config.REDIS_PWD)
 	defer Redis.ClosePool()
-	Log.Debug("这是DEBUG")
-	Log.Access("这是Access")
 	return
 }
 
