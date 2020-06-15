@@ -2,6 +2,7 @@ package Controller
 
 import (
 	"github.com/kataras/iris"
+	"lris-admin/App/Controller/Admin"
 )
 
 // 定义500错误处理函数
@@ -18,4 +19,9 @@ func RouterHandler(app *iris.Application) {
 	app.OnErrorCode(iris.StatusNotFound, err404)
 
 	app.Get("/", new(IndexController).Index).Name = "home"
+
+	//后台
+	app.PartyFunc("/admin", func(admin iris.Party) {
+		admin.Get("/", new(Admin.IndexController).Index).Name = "admin"
+	})
 }

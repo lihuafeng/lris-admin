@@ -1,9 +1,11 @@
-package Controller
+package Admin
 
-import "github.com/kataras/iris"
+import (
+	"github.com/kataras/iris"
+)
 
 type IndexController struct{}
 
 func (index *IndexController) Index(ctx iris.Context) {
-	ctx.View("index.html")
+	ctx.View("admin/index.html")
 }
