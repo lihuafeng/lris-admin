@@ -1,2 +1,4 @@
 .idea
 Runtime
+go.mod
+go.sum
