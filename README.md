@@ -1,1 +1,1 @@
-init
+golang lris框架简单小demo
