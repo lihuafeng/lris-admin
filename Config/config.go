@@ -7,9 +7,11 @@ const (
 	SERVER_TIME_FORMAT = "2006-01-02 15:04:05"
 	SERVER_CHARSET     = "UTF-8"
 
-	LOG_DIR  = "Runtime/Logs"
-	VIEW_DIR = "Views"
-	VIEW_EXT = ".html"
+	LOG_DIR    = "Runtime/Logs"
+	VIEW_DIR   = "Public/views"
+	VIEW_EXT   = ".html"
+	STATIC_DIR = "Public"
+	ICON_PATH  = "favicon.ico"
 
 	DB_DRIVE = "mysql"
 	DB_DNS   = "root:root@tcp(127.0.0.1:3306)/goadmin?charset=utf8&parseTime=true&loc=Local"

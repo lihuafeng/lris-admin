@@ -23,5 +23,6 @@ func RouterHandler(app *iris.Application) {
 	//后台
 	app.PartyFunc("/admin", func(admin iris.Party) {
 		admin.Get("/", new(Admin.IndexController).Index).Name = "admin"
+		admin.Get("/desktop", new(Admin.IndexController).Desktop).Name = "desktop"
 	})
 }

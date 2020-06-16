@@ -21,7 +21,10 @@ func initApp() (app *iris.Application) {
 	//请求记录
 	app.Use(new(AccessMdw).Handler())
 
-	app.RegisterView(iris.HTML(Config.VIEW_DIR, Config.VIEW_EXT))
+	app.RegisterView(iris.Django(Config.VIEW_DIR, Config.VIEW_EXT).Reload(true).Binary(Asset, AssetNames))
+	app.Favicon(Config.ICON_PATH, "/favicon.ico")
+	app.StaticEmbedded("/static", "Public", Asset, AssetNames)
+	app.StaticWeb("/static", Config.STATIC_DIR)
 	//路由实现
 	Log.Info("Register Router")
 	Controller.RouterHandler(app)
