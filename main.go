@@ -8,6 +8,7 @@ import (
 	. "lris-admin/App/Middleware"
 	"lris-admin/Config"
 	"lris-admin/Utils/DB"
+	"lris-admin/Utils/Helper"
 	"lris-admin/Utils/Log"
 	"lris-admin/Utils/Redis"
 	"strconv"
@@ -22,7 +23,9 @@ func initApp() (app *iris.Application) {
 	app.Use(new(AccessMdw).Handler())
 
 	app.RegisterView(iris.Django(Config.VIEW_DIR, Config.VIEW_EXT).Reload(true).Binary(Asset, AssetNames))
-	//app.Favicon(Config.ICON_PATH, "/favicon.ico")
+	if Helper.PathExist(Config.ICON_PATH) {
+		app.Favicon(Config.ICON_PATH, "/favicon.ico")
+	}
 	app.StaticEmbedded("/static", "Public", Asset, AssetNames)
 	app.StaticWeb("/static", Config.STATIC_DIR)
 	//路由实现
